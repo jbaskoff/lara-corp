@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFiltersTable extends Migration
+class ChangePortfoliosTabl extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateFiltersTable extends Migration
      */
     public function up()
     {
-        Schema::create('filters', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('title');
-            $table->string('alias')->unique();
-            $table->timestamps();
+        Schema::table('portfolios', function (Blueprint $table) {
+            $table->string('filter_alias');
+            $table->foreign('filter_alias')->references('alias')->on('filters');
         });
     }
 
@@ -28,6 +26,8 @@ class CreateFiltersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('filters');
+        Schema::table('portfolios', function (Blueprint $table) {
+            //
+        });
     }
 }

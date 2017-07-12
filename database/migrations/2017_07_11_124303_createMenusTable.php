@@ -17,7 +17,7 @@ class CreateMenusTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('path');
-            $table->integer('parent');
+            $table->integer('parent_id');
             $table->timestamps();
         });
     }
