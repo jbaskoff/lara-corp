@@ -163,6 +163,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        'Lavary\Menu\ServiceProvider',
+
         /*
          * Package Service Providers...
          */
@@ -230,6 +232,8 @@ return [
 
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+
+        'Menu'       => 'Lavary\Menu\Facade',
     ],
 
 ];
