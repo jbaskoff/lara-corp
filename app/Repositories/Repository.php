@@ -5,8 +5,11 @@ abstract class Repository{
 
     protected $model;
 
-    public function get() {
-        $builder = $this->model->select('*');
+    public function get($select = '*', $take = false) {
+        $builder = $this->model->select($select);
+        if ($take) {
+            $builder->take($take);
+        }
         return $builder->get();
 
     }
