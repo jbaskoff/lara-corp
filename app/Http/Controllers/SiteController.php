@@ -14,7 +14,7 @@ class SiteController extends Controller
     protected $template;
     protected $vars = [];
 
-    protected $contentRightBar = false;
+    protected $contentRightbar = false;
     protected $contentLeftBar = false;
 
     protected $bar = false;
@@ -29,6 +29,12 @@ class SiteController extends Controller
         $menu = $this->getMenu();
         $navigation = view(env('THEME') .'.navigation')->with('menu', $menu)->render();
         $this->vars = array_add($this->vars, 'navigation', $navigation);
+
+        if ($this->contentRightbar) {
+            $rightBar = view(env('THEME') . '.rightBar')->with('content_rightBar', $this->contentRightbar)->render();
+            $this->vars = array_add($this->vars, 'rightBar', $rightBar);
+        }
+
         return view($this->template)->with($this->vars);
     }
 

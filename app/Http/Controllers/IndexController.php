@@ -17,13 +17,16 @@ class IndexController extends SiteController
      */
     public function index()
     {
-        $portfolio = $this->getPortfolio();
-        $content = view(env('THEME') . '.content')->with('content', $portfolio)->render();
+        $portfolios = $this->getPortfolio();
+        $content = view(env('THEME') . '.content')->with('portfolios', $portfolios)->render();
         $this->vars = array_add($this->vars, 'content', $content);
 
         $sliderItems = $this->getSliders();
         $sliders = view(env('THEME') . ".slider")->with('sliders', $sliderItems)->render();
         $this->vars = array_add($this->vars, 'sliders', $sliders);
+
+        $articles = false;
+        $this->contentRightbar = view(env('THEME') . '.indexBar')->with('articles', $articles)->render();
 
         return $this->renderOutput();
     }

@@ -1,124 +1,59 @@
 @if('portfolio')
-<div id="content-home" class="content group">
-    <div class="hentry group">
-        <div class="section portfolio">
+    <div id="content-home" class="content group">
+        <div class="hentry group">
+            <div class="section portfolio">
 
-            <h3 class="title">Latest projects</h3>
+                <h3 class="title">Latest projects</h3>
 
-            <div class="hentry work group portfolio-sticky portfolio-full-description">
-                <div class="work-thumbnail">
-                    <a class="thumb"><img
-                                src="{{ asset(env('THEME')) }}/images/projects/0081-385x192.jpg"
-                                alt="0081" title="0081"/></a>
-                    <div class="work-overlay">
-                        <h3><a href="{{ asset(env('THEME')) }}/project.html">Steep This!</a></h3>
-                        <p class="work-overlay-categories"><img
-                                    src="{{ asset(env('THEME')) }}/images/categories.png"
-                                    alt="Categories"/> in: <a
-                                    href="{{ asset(env('THEME')) }}/category.html">Brand Identity</a>,
-                            <a href="{{ asset(env('THEME')) }}/category.html">Web Design</a></p>
+                @foreach($portfolios as $k => $portfolio)
+                    @if($k==0)
+                        <div class="hentry work group portfolio-sticky portfolio-full-description">
+                            <div class="work-thumbnail">
+                                <a href="{{route('portfolios.show', ['portfolios' => $portfolio->alias])}}" class="thumb"><img src="{{ asset(env('THEME')) }}/images/projects/{{$portfolio->img->max}}" alt="0081" title="0081"/></a>
+                                <div class="work-overlay">
+                                    <h3><a href="{{ route('portfolios.show', ['portfolios' => $portfolio->alias]) }}">{{$portfolio->title}}</a></h3>
+                                    <p class="work-overlay-categories">
+                                        <img src="{{ asset(env('THEME')) }}/images/categories.png" alt="Categories"/> in: <a href="{{$portfolio->filter->title}}">Brand Identity</a>
+                                </div>
+                            </div>
+                            <div class="work-description">
+                                <h2><a href="{{ route('portfolios.show', ['portfolios' => $portfolio->alias]) }}">{{$portfolio->title}}</a></h2>
+                                <p class="work-categories">in: <a href="{{ route('portfolios.show', ['portfolios' => $portfolio->alias]) }}">{{$portfolio->filter->title}}</a></p>
+                                <p>{{str_limit($portfolio->text, 200)}}</p>
+                                    <a href="{{route('portfolios.show', ['portfolios' => $portfolio->alias])}}" class="read-more">|| Read  more</a>
+                            </div>
+                        </div>
+
+                        <div class="clear"></div>
+                        @continue
+                    @endif
+
+                @if($k == 1)
+                    <div class="portfolio-projects">
+                @endif
+
+                    <div class="{{ $k == 4 ? 'related_project_last ' : '' }} related_project_last related_project">
+                        <div class="overlay_a related_img">
+                            <div class="overlay_wrapper">
+                                <img src="{{ asset(env('THEME')) }}/images/projects/{{$portfolio->img->max}}"  alt="0011" title="0011"/>
+                                <div class="overlay"><a class="overlay_img"  href="{{ route('portfolios.show', ['portfolios' => $portfolio->alias]) }}"  rel="lightbox" title=""></a>
+                                    <a class="overlay_project"  href="{{ asset(env('THEME')) }}/images/projects/{{$portfolio->img->path}}"></a>
+                                    <span class="overlay_title">{{$portfolio->title}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h4><a href="{{ route('portfolios.show', ['portfolios' => $portfolio->alias]) }}">{{$portfolio->title}}</a></h4>
+                        <p>{{  str_limit($portfolio->text, 100) }} </p>
                     </div>
+                        @endforeach
                 </div>
-                <div class="work-description">
-                    <h2><a href="{{ asset(env('THEME')) }}/project.html">Steep This!</a></h2>
-                    <p class="work-categories">in: <a href="{{ asset(env('THEME')) }}/category.html">Brand
-                            Identity</a>, <a href="{{ asset(env('THEME')) }}/category.html">Web
-                            Design</a></p>
-                    <p>Nullam volutpat, mauris scelerisque iaculis semper, justo odio rutrum urna, at
-                        cursus urna nisl et ipsum. Donec dapibus lacus nec sapien faucibus eget suscipit
-                        lorem mattis.</p>
-                    <p>Donec non mauris ac nulla consectetur pretium sit amet rhoncus [...]
-                        <a href="{{ asset(env('THEME')) }}/project.html" class="read-more">|| Read
-                            more</a>
-                </div>
-            </div>
 
+            </div>
             <div class="clear"></div>
-
-            <div class="portfolio-projects">
-
-                <div class="related_project">
-                    <div class="overlay_a related_img">
-                        <div class="overlay_wrapper">
-                            <img src="{{ asset(env('THEME')) }}/images/projects/0061-175x175.jpg"
-                                 alt="0061" title="0061"/>
-                            <div class="overlay">
-                                <a class="overlay_img"
-                                   href="{{ asset(env('THEME')) }}/images/projects/0061.jpg"
-                                   rel="lightbox" title=""></a>
-                                <a class="overlay_project"
-                                   href="{{ asset(env('THEME')) }}/project.html"></a>
-                                <span class="overlay_title">Love</span>
-                            </div>
-                        </div>
-                    </div>
-                    <h4><a href="{{ asset(env('THEME')) }}/project.html">Love</a></h4>
-                    <p>Nullam volutpat, mauris scelerisque iaculis semper, justo odio rutrum urna, [...]
-                </div>
-
-                <div class="related_project">
-                    <div class="overlay_a related_img">
-                        <div class="overlay_wrapper">
-                            <img src="{{ asset(env('THEME')) }}/images/projects/0071-175x175.jpg"
-                                 alt="0071" title="0071"/>
-                            <div class="overlay">
-                                <a class="overlay_img"
-                                   href="{{ asset(env('THEME')) }}/images/projects/0071.jpg"
-                                   rel="lightbox" title=""></a>
-                                <a class="overlay_project"
-                                   href="{{ asset(env('THEME')) }}/project.html"></a>
-                                <span class="overlay_title">Kineda</span>
-                            </div>
-                        </div>
-                    </div>
-                    <h4><a href="{{ asset(env('THEME')) }}/project.html">Kineda</a></h4>
-                    <p>Nullam volutpat, mauris scelerisque iaculis semper, justo odio rutrum urna, [...]
-                </div>
-
-                <div class="related_project">
-                    <div class="overlay_a related_img">
-                        <div class="overlay_wrapper">
-                            <img src="{{ asset(env('THEME')) }}/images/projects/009-175x175.jpg"
-                                 alt="009" title="009"/>
-                            <div class="overlay">
-                                <a class="overlay_img"
-                                   href="{{ asset(env('THEME')) }}/images/projects/009.jpg"
-                                   rel="lightbox" title=""></a>
-                                <a class="overlay_project"
-                                   href="{{ asset(env('THEME')) }}/project.html"></a>
-                                <span class="overlay_title">Guanacos</span>
-                            </div>
-                        </div>
-                    </div>
-                    <h4><a href="{{ asset(env('THEME')) }}/project.html">Guanacos</a></h4>
-                    <p>Nullam volutpat, mauris scelerisque iaculis semper, justo odio rutrum urna, [...]
-                </div>
-
-                <div class="related_project_last related_project">
-                    <div class="overlay_a related_img">
-                        <div class="overlay_wrapper">
-                            <img src="{{ asset(env('THEME')) }}/images/projects/0011-175x175.jpg"
-                                 alt="0011" title="0011"/>
-                            <div class="overlay">
-                                <a class="overlay_img"
-                                   href="{{ asset(env('THEME')) }}/images/projects/0011.jpg"
-                                   rel="lightbox" title=""></a>
-                                <a class="overlay_project"
-                                   href="{{ asset(env('THEME')) }}/project.html"></a>
-                                <span class="overlay_title">Miller Bob</span>
-                            </div>
-                        </div>
-                    </div>
-                    <h4><a href="{{ asset(env('THEME')) }}/project.html">Miller Bob</a></h4>
-                    <p>Nullam volutpat, mauris scelerisque iaculis semper, justo odio rutrum urna, [...]
-                </div>
-
-            </div>
         </div>
-        <div class="clear"></div>
+        <!-- START COMMENTS -->
+        <div id="comments">
+        </div>
+        <!-- END COMMENTS -->
     </div>
-    <!-- START COMMENTS -->
-    <div id="comments">
-    </div>
-    <!-- END COMMENTS -->
-</div>
+@endif
